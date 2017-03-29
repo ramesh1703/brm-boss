@@ -1,0 +1,69 @@
+<div class="container">
+
+  <div class="card-columns">
+    <div class="card p-0 card-outline-primary" *ngFor="let loa of loaList">
+      <div class="card-header card-primary card-inverse">
+        <h3>{{loa.server_host}} - {{loa.server_type}}</h3>
+      </div>
+      <div class="card-block">
+        <blockquote class="card-blockquote">
+          <app-process *ngFor="let process of loa.processes" [label]="process.label" [host]="loa.server_ip" [process]="process.name"
+            [userPin]="loa.username" [action]="action" [actionsEnabled]="actionsEnabled"></app-process>
+            <footer *ngIf="actionsEnabled">
+              <small>
+              <button type="button" class="btn btn-primary btn-sm" disabled>Start All</button>
+              <button type="button" class="btn btn-danger btn-sm" disabled>Stop All</button>
+              <button type="button" class="btn btn-primary btn-sm" disabled>Restart All</button>
+            </small>
+            </footer>
+        </blockquote>
+      </div>
+    </div>
+  </div>
+
+  <div class="card-rows">
+    <div class="card p-0 card-outline-primary">
+      <div class="card-header card-primary card-inverse">
+        <h3>Alerts</h3>
+      </div>
+      <div class="card-block">
+        <table class="table table-hover table-striped">
+          <thead class="thead-inverse">
+            <tr>
+              <th>ID</th>
+              <th>Severity</th>
+              <th>Server</th>
+              <th>Message</th>
+              <th>Status</th>
+              <th>Assignee</th>
+              <th>Created</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngIf="loading">
+              <td></td>
+              <td></td>
+              <td></td>
+              <td>
+                <h2><i class="fa fa-spinner fa-spin"></i> Refreshing data...</h2>
+              </td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr *ngFor="let alert of alertList">
+              <td class="card-{{alert.severiaty | lowercase}}">{{alert.id}}</td>
+              <td class="card-{{alert.severiaty | lowercase}}">{{alert.severiaty}}</td>
+              <td class="card-{{alert.severiaty | lowercase}}">{{alert.server}}</td>
+              <td class="card-{{alert.severiaty | lowercase}}">{{alert.message}}</td>
+              <td class="card-{{alert.severiaty | lowercase}}">{{alert.status}}</td>
+              <td class="card-{{alert.severiaty | lowercase}}">{{alert.assignee}}</td>
+              <td class="card-{{alert.severiaty | lowercase}}">{{alert.created | date:'MM/dd/yyyy'}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+</div>

@@ -1,0 +1,30 @@
+<div class="container">
+  <div class="card">
+    <h3 class="card-header">Login</h3>
+    <div class="card-block">
+      <form class="form-signin form-group" #loginForm="ngForm" (ngSubmit)="authenticate()">
+        <div class="alert alert-{{status}} alert-dismissible fade show" role="alert" *ngIf="error">
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          {{error}}
+        </div>
+        <div class="form-group has-feedback input-group input-group-lg margin-bottom-sm">
+          <input type="text" class="form-control login-inputs" id="username" required placeholder="Username" style="margin-bottom: 0;"
+            [(ngModel)]="login.username" name="username" #username="ngModel" autofocus>
+            <span class="input-group-addon"><i class="fa fa-user"></i></span>
+        </div>
+        <div class="form-group has-feedback input-group input-group-lg margin-bottom-sm">
+          <input type="password" class="form-control login-inputs" id="password" required placeholder="Password" style="margin-bottom: 0;"
+            [(ngModel)]="login.password" name="password" #password="ngModel">
+            <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+        </div>
+        <div>
+          <button class="btn btn-primary btn-lg" type="submit" [disabled]="!loginForm.form.valid || loading">
+              <i class="fa fa-spinner fa-spin" *ngIf="loading"></i> {{ loading? "Signing In" : "Sign In" }}
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

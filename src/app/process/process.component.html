@@ -1,0 +1,20 @@
+<div class="alert card-inverse card-success" role="alert" [ngClass]="{'card-danger': !processStatus}">
+  <h5 class="card-title"><i class="fa fa-refresh fa-spin fa-fw fa-2x" *ngIf="loading"></i>
+      <i>{{label}}</i> {{(loading)? 'is checking status...':(processStatus)?'process is running.':(error)?' - Unable to reach server':'process is not running.'}}</h5>
+  <footer>
+    <small>
+      <button type="button" class="btn btn-primary btn-sm" *ngIf="!processStatus && actionsEnabled" (click)="getProcess('start')"
+          [disabled]="loading">
+        Start
+      </button>
+      <button type="button" class="btn btn-danger btn-sm" *ngIf="processStatus && actionsEnabled" (click)="getProcess('stop')"
+          [disabled]="loading">
+        Stop
+      </button>
+      <button type="button" class="btn btn-primary btn-sm" *ngIf="processStatus && actionsEnabled" (click)="getProcess('restart')"
+          disabled>
+        Restart
+      </button>
+    </small>
+  </footer>
+</div>
